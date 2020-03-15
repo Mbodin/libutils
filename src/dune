@@ -1,3 +1,4 @@
 (library
+	(libraries extlib)
   (name libutils))
 
