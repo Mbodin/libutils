@@ -2,3 +2,6 @@
 	(libraries extlib)
   (name libutils))
 
+(env
+  (dev
+    (flags (:standard -w -6-50))))

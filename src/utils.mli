@@ -1,9 +1,12 @@
 (** Module Utils
  * Contains useful type declarations and functions. **)
 
-(** Switche some asserts on.
+(** Switch some asserts on.
  * These asserts can be costly to perform. **)
-val assert_defend : bool
+val assert_defend : unit -> bool
+
+(** Sets [assert_defend] to [false]. **)
+val quick_mode : unit -> unit
 
 
 (** Return its argument. **)
@@ -22,6 +25,10 @@ val apply_option : 'a option -> ('a -> 'b) -> 'b option
  * this function can extract its value.
  * The string is meant to help debug: using [__LOC__] is a good idea. **)
 val assert_option : string -> 'a option -> 'a
+
+(** Similar to [assert], but can be disabled by [assert_defend].
+ * As for [assert_option], the string is meant to be [__LOC__]. **)
+val assert_ : string -> bool -> unit
 
 (** The sum type of two types. **)
 type ('a, 'b) sum =

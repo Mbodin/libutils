@@ -20,6 +20,7 @@ val new_id_function : unit -> unit -> t
 
 (** Converts an identifier to a number that can be used as an array index. **)
 val to_array : t -> int
+
 (** Converts it back to an identifier. **)
 val from_array : int -> t
 

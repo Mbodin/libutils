@@ -4,7 +4,19 @@ open ExtString
 
 let _ = Random.self_init ()
 
-let assert_defend = true
+let (assert_defend, quick_mode) =
+  let r = ref true in
+  let assert_defend _ = !r in
+  let quick_mode _ = r := false in
+  (assert_defend, quick_mode)
+
+let assert_option err = function
+  | None -> failwith ("This option-type should not be [None]. " ^ err)
+  | Some v -> v
+
+let assert_ err = function
+  | false -> failwith ("This assertion should hold. " ^ err)
+  | true -> ()
 
 
 let id x = x
@@ -17,14 +29,6 @@ let apply_option o f =
 let if_option = function
   | None -> fun _ -> None
   | Some x -> fun f -> f x
-
-let unsome_default d = function
-  | None -> d
-  | Some x -> x
-
-let assert_option err = function
-  | None -> failwith ("This option-type should not be [None]. " ^ err)
-  | Some v -> v
 
 type ('a, 'b) sum =
   | Left of 'a
@@ -86,8 +90,8 @@ let uniq ?(cmp = compare) l =
 
 let is_uniq_witness ?(cmp = compare) l =
   let rec aux = function
-    | a :: b :: l when a = b -> Some a
-    | a :: l -> aux l
+    | a :: b :: _ when a = b -> Some a
+    | _ :: l -> aux l
     | [] -> None in
   aux (List.sort ~cmp:cmp l)
 

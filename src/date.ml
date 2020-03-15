@@ -33,7 +33,7 @@ let rec add_days (y, d, m) i =
     (y, d + i, m)
   else add_days (add_years (y, d, m) 1) (i - size_year y)
 
-let rec add_minutes (y, d, m) i =
+let add_minutes (y, d, m) i =
   if m + i < 0 then
     let mp = Utils.positive_mod (m + i) (60 * 24) in
     let dd = (m + i - mp) / (60 * 24) in
@@ -120,7 +120,7 @@ let iso8601 (y, d, m) =
  * been splitted by looking for non-numerical characters.
  * In the case that these non-numerical characters are not
  * present, then the size is used as an indicator. **)
-let rec get_integer n = function
+let get_integer n = function
   | [] -> (1, [])
   | str :: l ->
     try
@@ -140,7 +140,7 @@ let from_iso8601 str =
       | l ->
         let (year, l) = get_integer 4 l in
         let (month, l) = get_integer 2 l in
-        let (day, l) = get_integer 2 l in
+        let (day, _l) = get_integer 2 l in
         (year, month, day) in
     let (year, d) = month_day_inv year month day in
     normalise (year, d, 0)
@@ -164,7 +164,7 @@ let from_rfc2445 str =
       | hour :: minute :: _ -> (int_of_string hour, int_of_string minute)
       | l ->
         let (hour, l) = get_integer 2 l in
-        let (minute, l) = get_integer 2 l in
+        let (minute, _l) = get_integer 2 l in
         (hour, minute) in
     let (date, time) =
       match String.split_on_char 'T' str with
