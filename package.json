@@ -4,7 +4,7 @@
   "description": "A collection of useful modules",
   "license": "LGPLv3",
   "esy": {
-    "build": "dune build @all",
+    "build": "dune build @install",
     "buildsInSource": "_build"
   },
   "dependencies": {
