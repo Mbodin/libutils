@@ -1,9 +1,9 @@
 (library
-	(libraries extlib)
-  (name libutils)
-  (public_name libutils))
+	(public_name libutils)
+	(name libutils)
+	(libraries extlib unix))
 
 (env
-  (dev
-    (flags (:standard -w -6-50))))
+	(dev
+		(flags (:standard -w -6-50))))
 
