@@ -1,7 +1,9 @@
 (library
 	(public_name libutils)
 	(name libutils)
-	(libraries extlib unix))
+	(inline_tests)
+	(libraries extlib unix)
+	(preprocess (pps ppx_inline_test)))
 
 (env
 	(dev

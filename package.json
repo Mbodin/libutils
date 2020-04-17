@@ -1,16 +1,20 @@
 {
-  "name": "libutils",
-  "version": "1.0",
-  "description": "A collection of useful modules",
-  "license": "LGPLv3",
-  "esy": {
-    "build": "dune build @all",
-    "install": "dune install --prefix=#{self.install}",
-    "buildsInSource": "_build"
-  },
-  "dependencies": {
-    "ocaml": "~4.7.0",
+	"name": "libutils",
+	"version": "1.0",
+	"description": "A collection of useful modules",
+	"license": "LGPLv3",
+	"esy": {
+		"build": "dune build @all",
+		"install": "dune install --prefix=#{self.install}",
+		"buildsInSource": "_build"
+	},
+	"scripts": {
+		"test": "dune runtest"
+	},
+	"dependencies": {
+		"ocaml": "~4.7.0",
 		"@opam/dune": ">=1.11",
-    "@opam/extlib": "*"
-  }
+		"@opam/extlib": "*",
+		"@opam/ppx_inline_test": "*"
+	}
 }

@@ -332,3 +332,11 @@ let enum_split_on_char c =
       (fun _ -> create !ended !str) in
   create false
 
+(** [enum_split_on_char] should behaves exactly like [split_on_char]. **)
+let test_split_on_char c str =
+  List.of_enum (enum_split_on_char c str) = String.split_on_char c str
+let%test _ = test_split_on_char ':' "a:b:c:d"
+let%test _ = test_split_on_char ':' ":::"
+let%test _ = test_split_on_char ':' "abcd"
+let%test _ = test_split_on_char ':' ""
+

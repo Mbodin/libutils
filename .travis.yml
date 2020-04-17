@@ -16,5 +16,6 @@ install:
   - esy install
 
 script:
-  - esy
+  - esy build
+  - esy test
 

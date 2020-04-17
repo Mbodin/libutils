@@ -145,6 +145,19 @@ let from_iso8601 str =
     let (year, d) = month_day_inv year month day in
     normalise (year, d, 0)
 
+(** [from_iso8601] and [iso8601] should cancel each others,
+ * relative to the minutes (which are not stored in this format). **)
+let test_iso8601 d =
+  let d' = from_iso8601 (iso8601 d) in
+  let d_truncated =
+    let (y, d, _) = d in
+    (y, d, 0) in
+  compare d_truncated d' = 0
+let%test _ = test_iso8601 now
+let%test _ = test_iso8601 (add_years now (Random.int 100 - 50))
+let%test _ = test_iso8601 (add_days now (Random.int 100 - 50))
+let%test _ = test_iso8601 (add_minutes now (Random.int 100 - 50))
+
 let rfc2445 (y, d, m) =
   let (month, day) = month_day (y, d, m) in
   let y = Utils.positive_mod y 10_000 in
@@ -178,6 +191,13 @@ let from_rfc2445 str =
     let (y, d, _) = from_iso8601 date in
     let (h, m) = parse_time time in
     (y, d, 60 * h + m)
+
+(** [from_rfc2445] and [rfc2445] should cancel each others. **)
+let test_rfc2445 d = compare d (from_rfc2445 (rfc2445 d)) = 0
+let%test _ = test_rfc2445 now
+let%test _ = test_rfc2445 (add_years now (Random.int 100 - 50))
+let%test _ = test_rfc2445 (add_days now (Random.int 100 - 50))
+let%test _ = test_rfc2445 (add_minutes now (Random.int 100 - 50))
 
 let timeline (y, d, m) =
   let (month, day) = month_day (y, d, m) in
