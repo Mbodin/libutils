@@ -152,7 +152,7 @@ let list_map_option f l =
     if_option r (fun l -> if_option (f e) (fun v -> Some (v :: l)))) (Some []) l)
 
 let list_find_map_opt f l =
-  try Some (List.find_map f l)
+  try Some (List.find_map_exn f l)
   with Not_found -> None
 
 let rec list_partition_map f = function

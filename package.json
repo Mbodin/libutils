@@ -12,9 +12,9 @@
 		"test": "dune runtest"
 	},
 	"dependencies": {
-		"ocaml": "~4.7.0",
+		"ocaml": "~4.7",
 		"@opam/dune": ">=1.11",
-		"@opam/extlib": "*",
+		"@opam/extlib": "~1.7.7",
 		"@opam/ppx_inline_test": "*"
 	}
 }
