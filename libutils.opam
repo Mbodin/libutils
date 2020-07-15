@@ -3,9 +3,12 @@ opam-version: "2.0"
 synopsis: "A collection of useful modules"
 description:
   "A collection of modules that I find very useful in OCaml projects"
+maintainer: ["Martin Constantino–Bodin <martin.bodin@ens-lyon.org>"]
 license: "LGPLv3"
+homepage: "https://mbodin.github.io/libutils/"
+bug-reports: "https://github.com/Mbodin/libutils/issues"
 depends: [
-  "dune" {>= "1.11"}
+  "dune" {>= "2.0"}
 ]
 build: [
   ["dune" "subst"] {pinned}
@@ -21,3 +24,4 @@ build: [
     "@doc" {with-doc}
   ]
 ]
+dev-repo: "git+https://github.com/Mbodin/libutils.git"
